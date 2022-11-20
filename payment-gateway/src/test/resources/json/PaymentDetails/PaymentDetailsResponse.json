@@ -1,0 +1,29 @@
+{
+  "paymentId": "pay_1",
+  "amount": 6540,
+  "currency": "GBP",
+  "approved": true,
+  "status": "Authorized",
+  "responseSummary": "Approved",
+  "processedOn": "2022-11-18T10:11:12Z",
+  "cardDetails": {
+    "maskedNr": "409887******6094",
+    "expiryMonth": "01",
+    "expiryYear": "24",
+    "cardholder": "Bruce Wayne"
+  },
+  "customer": {
+    "firstName": "Bruce",
+    "lastName": "Wayne",
+    "address": {
+      "addressLine1": "BW LTD",
+      "addressLine2": "90 St James Road",
+      "city": "London",
+      "state": "London",
+      "postCode": "E14",
+      "country": "GB"
+    },
+    "email": "brucewayne@gmail.com",
+    "phone": "+444155552671"
+  }
+}

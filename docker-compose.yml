@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: payment-gateway
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/checkout?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      MOCKSERVER_ENDPOINT: http://mock_server:1080
+    depends_on:
+      - mysql_db
+      - mock_server
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    ports:
+      - "80:8080"
+    volumes:
+      - ./swagger/openSpec.yaml:/openSpec.yaml
+    environment:
+      SWAGGER_JSON: /openSpec.yaml
+  mock_server:
+    image: mockserver/mockserver:5.14.0
+    container_name: mock_server
+    ports:
+      - 1080:1080
+    environment:
+      MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
+    volumes:
+      - type: bind
+        source: ./cko-bank-simulator
+        target: /config
+  mysql_db:
+    platform: linux/x86_64
+    image: mysql:5.7.34
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=checkout
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=admin
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306
+volumes:
+  mysql-db:

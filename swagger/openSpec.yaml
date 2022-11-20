@@ -1,0 +1,213 @@
+swagger: '2.0'
+info:
+  title: Payment Gateway
+  description: Swagger for Checkout.com Payment Gateway Service API Specification
+  termsOfService: 'https://www.example.com/terms'
+  contact:
+    name: Service Desk
+    email: ServiceDesk@imgarena.com
+  license:
+    name: open-licence
+    url: 'https://www.example.com/open-licence'
+  version: v1
+basePath: /api/v1
+schemes:
+  - https
+  - http
+produces:
+  - application/json; charset=utf-8
+paths:
+  /payments/{paymentId}:
+    get:
+      tags:
+        - Payment Details
+      summary: Retrieve the details of a previously made payment.
+      operationId: paymentId
+      parameters:
+        - name: "paymentId"
+          in: "path"
+          description: "ID of the processed payment"
+          required: true
+          type: string
+      responses:
+        '200':
+          $ref: '#/responses/200PaymentDetails'
+        '400':
+          $ref: '#/responses/400Error'
+        '500':
+          $ref: '#/responses/500Error'
+  /payments:
+    post:
+      tags:
+        - Process New Payment
+      summary: Process a payment through the payment gateway
+      description: Add a new pet to the store
+      operationId: addPet
+      parameters:
+        - $ref: '#/parameters/PaymentRequest'
+      responses:
+        '200':
+          $ref: '#/responses/200PaymentProcessed'
+        '400':
+          $ref: '#/responses/400Error'
+        '500':
+          $ref: '#/responses/500Error'
+
+definitions:
+  ErrorResponse:
+    type: object
+    properties:
+      statusCode:
+        type: integer
+      timestamp:
+        type: string
+      message:
+        type: string
+      description:
+        type: string
+  PaymentRequestPayload:
+    type: object
+    properties:
+      amount:
+        type: integer
+      currency:
+        type: string
+      reference:
+        type: string
+      cardDetails:
+        type: object
+        properties:
+          number:
+            type: string
+          expiryMonth:
+            type: string
+          expiryYear:
+            type: string
+          cardholder:
+            type: string
+          cvv:
+            type: string
+      customer:
+        type: object
+        properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          phone:
+            type: string
+          address:
+            type: object
+            properties:
+              addressLine1:
+                type: string
+              addressLine2:
+                type: string
+              postCode:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              country:
+                type: string
+  PaymentProcessedResponse:
+    type: object
+    properties:
+      paymentId:
+        type: string
+      amount:
+        type: integer
+      currency:
+        type: string
+      approved:
+        type: boolean
+      status:
+        type: string
+      responseSummary:
+        type: string
+      processedOn:
+        type: string
+        format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+  PaymentDetailsResponse:
+    type: object
+    properties:
+      paymentId:
+        type: string
+      amount:
+        type: integer
+      currency:
+        type: string
+      approved:
+        type: boolean
+      status:
+        type: string
+      responseSummary:
+        type: string
+      processedOn:
+        type: string
+        format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+      cardDetails:
+        type: object
+        properties:
+          maskedNumber:
+            type: string
+          expiryMonth:
+            type: string
+          expiryYear:
+            type: string
+          cardholder:
+            type: string
+      customer:
+        type: object
+        properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          phone:
+            type: string
+          address:
+            type: object
+            properties:
+              addressLine1:
+                type: string
+              addressLine2:
+                type: string
+              postCode:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              country:
+                type: string
+parameters:
+  PaymentRequest:
+    name: PaymentRequest
+    in: body
+    description: Payment Request Payload
+    required: true
+    schema:
+      $ref: '#/definitions/PaymentRequestPayload'
+responses:
+  200PaymentDetails:
+    description: Payment Details Retrieved Successfully
+    schema:
+      $ref: '#/definitions/PaymentDetailsResponse'
+  200PaymentProcessed:
+    description: Payment Request Processed Successfully
+    schema:
+      $ref: '#/definitions/PaymentProcessedResponse'
+  400Error:
+    description: Bad request
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+  500Error:
+    description: Internal Server Error
+    schema:
+      $ref: '#/definitions/ErrorResponse'

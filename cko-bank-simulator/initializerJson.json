@@ -1,0 +1,97 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/v1/payments/{paymentId}",
+      "pathParameters": {
+        "paymentId": [
+          "pay_1"
+        ]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "data": {
+          "paymentId": "pay_1",
+          "amount": 6540,
+          "currency": "GBP",
+          "approved": true,
+          "reference": "ORD-123",
+          "status": "Authorized",
+          "responseSummary": "Approved",
+          "processedOn": "2022-11-18T10:11:12Z",
+          "cardDetails": {
+            "maskedNr": "409887******6094",
+            "expiryMonth": "01",
+            "expiryYear": "24",
+            "cardholder": "Bruce Wayne"
+          },
+          "customer": {
+            "firstName": "Bruce",
+            "lastName": "Wayne",
+            "email": "brucewayne@gmail.com",
+            "phone": "+444155552671",
+            "address": {
+              "addressLine1": "BW LTD",
+              "addressLine2": "90 St James Road",
+              "postCode": "E14",
+              "city": "London",
+              "state": "London",
+              "country": "GB"
+            }
+          }
+        }
+      }
+    },
+    "timeToLive": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/payments"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "data": {
+          "paymentId": "pay_1",
+          "amount": 6540,
+          "currency": "GBP",
+          "approved": true,
+          "reference": "ORD-123",
+          "status": "Authorized",
+          "responseSummary": "Approved",
+          "processedOn": "2022-11-18T10:11:12Z"
+        }
+      }
+    },
+    "times": {
+      "remainingTimes": 3,
+      "unlimited": false
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/payments"
+    },
+    "httpResponse": {
+      "statusCode": 422,
+      "body": {
+        "error": {
+          "paymentId": "pay_2",
+          "errorType": "Invalid Request",
+          "errorCodes": "1980",
+          "errorDescription": "Unable to process the payment. Please contact your bank!"
+        }
+      }
+    },
+    "times": {
+      "remainingTimes": 5,
+      "unlimited": false
+    }
+  }
+]

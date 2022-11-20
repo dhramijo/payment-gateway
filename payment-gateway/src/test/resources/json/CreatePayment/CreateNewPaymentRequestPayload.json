@@ -1,0 +1,26 @@
+{
+  "amount": 6540,
+  "currency": "GBP",
+  "reference": "ORD-1223",
+  "cardDetails": {
+    "number": "4098870511026095",
+    "expiryMonth": "03",
+    "expiryYear": "26",
+    "cardholder": "Bruce Wayne",
+    "cvv": "112"
+  },
+  "customer": {
+    "firstName": "Bruce",
+    "lastName": "Wayne",
+    "email": "brucewayne@gmail.com",
+    "phone": "+444155552671",
+    "address": {
+      "addressLine1": "BW LTD",
+      "addressLine2": "90 St James Road",
+      "postCode": "E14",
+      "city": "London",
+      "state": "London",
+      "country": "GB"
+    }
+  }
+}

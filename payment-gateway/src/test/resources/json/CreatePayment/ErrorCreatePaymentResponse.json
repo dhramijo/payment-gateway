@@ -1,0 +1,4 @@
+{
+  "message": "422 Unprocessable Entity: \"{<EOL>  \"error\" : {<EOL>    \"paymentId\" : \"pay_2\",<EOL>    \"errorType\" : \"Invalid Request\",<EOL>    \"errorCodes\" : \"1980\",<EOL>    \"errorDescription\" : \"Unable to process the payment. Please contact your bank!\"<EOL>  }<EOL>}\"",
+  "timestamp": "2022-11-19T18:23:22.373+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "paymentId": "pay_1",
+  "amount": 6540,
+  "currency": "GBP",
+  "approved": true,
+  "status": "Authorized",
+  "responseSummary": "Approved",
+  "processedOn": "2022-11-18T10:11:12Z"
+}
