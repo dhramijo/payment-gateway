@@ -1,4 +1,4 @@
-# Checkout.com - Payment Gateway
+# Payment Gateway
 
 ## The Challenge
 E-Commerce is experiencing exponential growth and merchants who sell their goods or services online need a way to easily collect money from their customers.
